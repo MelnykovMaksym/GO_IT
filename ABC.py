@@ -22,6 +22,5 @@ class SerializationToBin(SerializationInterface):
 
 a = SerializationToBin()
 print(a.serialization(data))
-b = SerializationToBin()
 
 
