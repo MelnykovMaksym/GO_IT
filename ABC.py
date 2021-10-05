@@ -13,14 +13,21 @@ class SerializationInterface(metaclass=ABCMeta):
     @abstractmethod
     def serialization(self):
         pass
+    @abstractmethod
+    def deserialization(self):
+        pass
 
 class SerializationToBin(SerializationInterface):
 
     def serialization(self, *args):
-        new_js = json.dumps(args, indent=2)
-        return new_js
+        return json.dumps(args, indent=2)
+
+    def deserialization(self, *args):
+        return json.loads()
+
 
 a = SerializationToBin()
 print(a.serialization(data))
+print(a.serialization(str_json))
 
 
