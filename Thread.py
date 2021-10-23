@@ -8,8 +8,8 @@ import tkinter.messagebox
 
 
 def engine():
-    for k in files:
-        file_ext = os.path.splitext(k)[1]
+    for file in files:  # create a loop for matching files and make required manipulations
+        file_ext = os.path.splitext(file)[1]
         pattern = r'([\w]+)'
         match = re.search(pattern, file_ext)
         if match:
@@ -18,21 +18,22 @@ def engine():
             if not os.path.exists(path1):
                 os.mkdir(path1)
             os.chdir(path)
-            os.system("move " + '"' + k + '"' + " " + '"' + path1 + '"')
-            ext.append(folder_name)
+            os.system("move " + '"' + file + '"' + " " + '"' + path1 + '"')
+            lst.append(folder_name)
 
-
-root = Tk()
-root.withdraw()
-temp_file = tkinter.filedialog.askdirectory(parent=root, initialdir=os.getcwd(), title="Select a folder to sort")
-path = temp_file + "/"
-files = os.listdir(path)
-ext = []
 
 if __name__ == "__main__":
+
+    root = Tk()
+    root.withdraw()
+    temp_file = tkinter.filedialog.askdirectory(parent=root, initialdir=os.getcwd(),
+                                                title="Select a folder to sort")
+    path = temp_file + "/"
+    files = os.listdir(path)
+    lst = []  # empty list
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         executor.submit(engine)
 
     if len(temp_file) > 0:
         tkinter.messagebox.showinfo(title="Successfully", message="Files sorted")
-
