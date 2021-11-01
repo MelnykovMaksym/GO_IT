@@ -12,6 +12,7 @@ def engine():
         file_ext = os.path.splitext(file)[1]  # define file extension
         pattern = r'([\w]+)'  # create the pattern
         match = re.search(pattern, file_ext)  # extract extension
+        print(match)
         if match:
             folder_name = match.group().upper()  # use group() - If a group matches multiple
             # times, only the last match is accessible
@@ -30,6 +31,7 @@ if __name__ == "__main__":
                                                 title="Select a folder to sort")
     path = temp_file + "/"
     files = os.listdir(path)
+
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         executor.submit(engine)
