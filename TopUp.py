@@ -1,8 +1,13 @@
+import asyncio
 
 
-a = [i for i in range(11) if i%2 == 0]
+async def async_func():
+    print('Запуск ...')
+    await asyncio.sleep(1)
+    print('... Готово!')
 
-print(a)
+async def main():
+    await async_func()
 
 
-
+asyncio.run(main())
